@@ -66,7 +66,7 @@ function ball() {
 }
 
 function shoutout(msg) {
-    const a = msg.slice(0, 3);
+    const a = msg.slice(4, msg.length);
     return a;
 }
 
@@ -91,16 +91,13 @@ function onMessageHandler(target, context, msg, self,) {
     } else {
         console.log(`* Unknown command ${commandName}`);
     }
-
-    //Shoutout command using slice to get username
-    if (msg.toLowerCase().startsWith(`!so`) === true) {
-        const name = shoutout(msg);
-        client.say(`Boo ${ msg } ${name}`);
-        console.log(`* Executed ${commandName} command`);
+    if (msg.startsWith(`!so`) === true) {
+        result = shoutout(msg);
+        client.say(target, `Hey you, go follow @${result} at www.twitch.tv/${result}`);
+        console.log(` Executed shoutout command`);
     } else {
-        console.log(`* Unknown command ${commandName}`);
+        console.log(` Unknown command `);
     }
-
     // Pack name
     if (commandName === `!pack`) {
         client.say(target, ` This pack is Engineer's Life, you can find it on the Twitch Launcher`)
